@@ -1,0 +1,8 @@
+__pycache__
+node_modules
+venv/
+.vscode/
+.env
+.vercel
+a.bat
+backend/db.sqlite3

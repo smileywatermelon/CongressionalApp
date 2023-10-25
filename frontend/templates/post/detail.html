@@ -1,0 +1,52 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PCA Connect{% endblock title %}
+
+{% block body %}
+<br>
+<p class="mx-4 my-3"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/">Back to home</a></p>
+
+<div>
+    {% if parent %}
+    <div class="postWrap mx-4 my-2">
+        <p class="">{{ parent.user.display_name}} <br> <a href="/user/@{{ parent.user.username }}"
+            class="username lh-sm text-primary fw-bold text-decoration-none">@{{ parent.user.username}} {{ parent.pk }}</a></p>
+        <p class="postContent lh-1 POST text-justify">{{ parent.text }}</p>
+        <span class="mx-1 lh-1 text-secondary">{{ parent.like_count }}</span>
+        <button class="btn">
+          <i class="bi bi-hand-thumbs-up"></i>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="postWrap mx-4 my-2">
+        <p class="">{{ object.user.display_name}} <br> <a href="/user/@{{ object.user.username }}"
+            class="username lh-sm text-primary fw-bold text-decoration-none">@{{ object.user.username}}</a></p>
+        <p class="postContent lh-1 POST text-justify">{{ object.text }}</p>
+        <span class="mx-1 lh-1 text-secondary">{{ object.like_count }}</span>
+        <button class="btn">
+          <i class="bi bi-hand-thumbs-up"></i>
+        </button>
+      </div>
+    </div>
+
+    {% for comment in comments %}
+    <div class="postWrap mx-4 my-2">
+        <p class="">{{ comment.user.display_name}} <br> <a href="/user/@{{ comment.user.username }}"
+            class="username lh-sm text-primary fw-bold text-decoration-none">@{{ comment.user.username}}</a></p>
+        <p class="postContent lh-1 POST text-justify">{{ comment.text }}</p>
+        <span class="mx-1 lh-1 text-secondary">{{ comment.like_count }}</span>
+        <button class="btn">
+          <i class="bi bi-hand-thumbs-up"></i>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+
+
+    
+{% endblock%}

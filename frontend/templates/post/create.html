@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Tweeter{% endblock title %}
+
+{% block body %}
+<form action="{% url 'post-create' %}" method = "post">
+    {% csrf_token %}
+    <br>
+    <p class="my-3 mx-4"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/">Back to home</a></p>
+    <div class="form-floating my-3 mx-4">
+        <textarea name = 'tweet' class="form-control" placeholder="Create a new post" id="newPost" style="height: 100px"></textarea>
+        <label for="floatingTextarea2">New Post</label>
+    </div>
+    </div>
+        <button class="btn btn-primary m-3">Send Post</button>
+    </div>
+</form>
+{% endblock%}

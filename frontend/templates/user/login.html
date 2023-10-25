@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="w-50 p-3 m-4 v1_2">
+    <h4 class='mb-4'>Login</h4>
+    <!-- sends data to ProfileLogin in views .py -->
+    <form action="{% url 'user-login' %}" method="post">
+        {% csrf_token %}
+        <p class="my-4"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/user/signup/">Or sign up</a></p>
+
+        <div class=" v1_3 form-outline mb-4">
+            <input  type="text" id="usernameInput" class="v1_5 form-control" name = "username" placeholder="Username" />
+        </div>
+        <div class=" v1_4 form-outline mb-3">
+            <input type="password" id="passwordInput" class="form-control"  name = "password" placeholder="Password" />
+        </div>
+        <input class=" v1_6 m-2 btn btn-primary col-2" type="submit" value="Login">
+    </form>
+</div>   
+
+{% endblock %}

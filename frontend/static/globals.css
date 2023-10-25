@@ -1,0 +1,45 @@
+
+a {
+  text-decoration: none !important;
+  color:white;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  font-size: 14px;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding-top: 25px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.POST {
+  word-wrap: break-word
+}
+
+.circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 60px;
+  font-size: 32px;
+  text-align: center;
+  pointer-events: fill;
+}
+
+.newpost {
+  size: 64px 64px;
+  border-radius: 60px;
+  font-size: 32px;
+}
+
+i {
+  size: 24px 24px;
+}
+
+.CLICK {
+  pointer-events: none;
+  background: none !important;
+}

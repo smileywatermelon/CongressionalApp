@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PCA Connect{% endblock title %}
+
+{% block body %}
+
+<div id="posts">
+{% for post in object_list %}
+<br>
+    <div class="postWrap mx-4 my-2" id="{{ post.id }}">
+        <p class="">{{ post.user.display_name }} <br> <a href="/user/@{{ post.user.username }}"
+            class="username lh-sm text-primary fw-bold text-decoration-none">@{{ post.user.username }}</a></p>
+        <p class="postContent lh-1 POST text-justify">{{ post.text }}</p>
+        <span class="mx-1 lh-1 text-secondary">{{ post.like_count }}</span>
+        <a id="i-{{post.id}}"class="btn" href="/post/{{ post.id }}/like/">
+            <i id="ii-{{post.id}}"class="bi bi-hand-thumbs-up"></i>
+        </a>
+    </div>
+</div>
+{% endfor %}
+    <span class="fixed-bottom float-right CLICK">
+      <div><button class="btn btn-primary m-3 float-end shadow-sm circle btn-lg"><a class="lh-1 newpost" href="{% url 'post-create' %}"><i class="bi bi-plus-circle-fill"></i></a></button></div>
+    </span>
+<p id="user_id" hidden>{{ user.profile.id }}</p>
+<script>
+let allPosts = document.getElementsByClassName("postWrap");
+const ID = document.getElementById("user_id").innerHTML;
+
+for (let i = 0; i < allPosts.length; i++) {
+    let post = allPosts[i].id;
+    $.getJSON(`/api/posts/${post}/`, (data) => {
+        
+        let users = data.liked_users
+        let liked = false
+
+        for (let j = 0; j < users.length; j++) {
+            if (ID == users[j]) {
+                liked = true;
+                break
+            }
+        }
+        console.log(liked);
+        if (liked) {
+            $(`#ii-${post}`).removeClass("bi-hand-thumbs-up");
+            $(`#ii-${post}`).addClass("bi-hand-thumbs-up-fill");
+            
+        } else {
+            $(`#ii-${post}`).removeClass("bi-hand-thumbs-up-fill");
+            $(`#ii-${post}`).addClass("bi-hand-thumbs-up");
+        }
+        
+        
+    })
+}
+
+</script>
+{% endblock%}

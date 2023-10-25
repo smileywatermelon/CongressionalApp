@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}New Post{% endblock title %}
+
+{% block body %}
+<div class="w-50 p-3 m-4">
+    <h4 class='mb-4'>Sign Up</h4>
+    <p class=" my-4"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/user/login/">Or login</a></p>
+    <form action="{% url 'user-signup' %}" method="post" >
+        {% csrf_token %}
+        {{form.errors}}
+        
+        <div class="form-outline mb-4">
+            <input class="form-control" type="text" name="username" required="" id="id_username" placeholder="Username">
+        </div>  
+        <div class="form-outline mb-4">
+            <input class="form-control" type="password" name="password" required="" id="id_password" placeholder="Password">
+        </div>
+        <div id="error">
+        </div>
+        <div class="form-outline mb-3">
+            <input class="form-control" type="password" name="confirm" id="confirm" placeholder="Confirm Password">
+        </div>
+        <input class="m-2 btn btn-primary col-2" type="submit" value="Sign Up">
+    </form>
+    <p>
+        <ul hidden>
+            <li>Can't be similar to username</li>
+            <li>Must contain at least 8 character</li>
+            <li>Can't be commonly used</li>
+            <li>Can't be entirely numeric</li>
+        </ul>
+        
+    </p>
+</div>
+<script>
+    const button = document.getElementById('btn');
+    button.on('click', () => {
+
+    })
+
+</script>
+{% endblock%}
