@@ -103,13 +103,14 @@ class PostDetail(LoginRequired, DetailView):
 # Base Code for Reference
 @login_required
 def post_reply(request, pk):
-    post = get_object_or_404(Post, id=request.POST.get("id"))
-    if post.liked_users.filter(id=request.user.id).exists():
-        request.user.liked_posts.remove(post)
-    else:
-        request.user.liked_posts.add(post)
+    if request.method == "POST":
+        comment = request.POST.get('comment')
+        post = Post.objects.filter(id=pk).first()
+        reply = Post(parent = comment, Profile = request.user)
+        reply.save()
+        return HttpResponseRedirect('/') 
+    return render(request, 'post/reply.html')
 
-    return HttpResponseRedirect(f"/post/{pk}/")
 
 @login_required
 def post_like(request, pk):

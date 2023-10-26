@@ -12,7 +12,7 @@ from .views import (
 from . import views
 
 from .views_api import (
-    router
+    router, LikeView
 )
 
 urlpatterns = [
@@ -25,7 +25,8 @@ urlpatterns = [
 	path('user/@<str:slug>/', ProfileDetail.as_view(), name='user-detail'),
     path('post/create/', views.create_post, name = 'post-create'),
     path('post/<pk>/', PostDetail.as_view(), name='post-detail'),
-    path('post/<pk>/like/', post_like, name='post-like'),
+    path('post/<int:pk>/like/', LikeView.as_view(), name='post-like'),
+    path('post/<str:pk>/reply/', views.post_reply, name = 'reply'),
     
     # Redirects
     path('signup/', RedirectView.as_view(url='/user/signup/')),

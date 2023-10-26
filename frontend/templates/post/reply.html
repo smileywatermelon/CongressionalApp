@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}New Post{% endblock title %}
+{% block title %}Reply{% endblock title %}
 
 {% block body %}
 <form action="{% url 'post-create' %}" method = "post">
@@ -12,9 +12,9 @@
         <textarea name = 'tweet' class="form-control" placeholder="Create a new post" id="newPost" style="height: 100px"></textarea>
         <label for="floatingTextarea2">New Post</label>
     </div>
+    </div>
+        <button class="btn btn-primary m-3">Send Post</button>
+    </div>
     <p class="my-3 mx-4"><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://www.markdownguide.org/cheat-sheet/">Your posts support Markdown.</a></p>
-    </div>
-        <button class="btn btn-primary my-2 mx-4">Send Post</button>
-    </div>
 </form>
-{% endblock %}
+{% endblock % }

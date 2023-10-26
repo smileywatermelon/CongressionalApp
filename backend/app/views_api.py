@@ -1,3 +1,4 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework import routers
@@ -36,8 +37,16 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class LikeView(APIView):
-    def get(self, request):
-        pass
+    def put(self, request, pk, format=None):
+        user: Profile = request.user.profile
+        post = Post.objects.filter(id=pk).first()
+
+        if user.liked_posts.exists(post):
+            user.liked_posts.remove(post)
+        else:
+            user.liked_posts.add(post)
+
+        return HttpResponseRedirect('/')
 
 
 router = routers.SimpleRouter()
