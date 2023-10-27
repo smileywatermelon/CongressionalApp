@@ -2,13 +2,15 @@ from typing import Any
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, FormView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
+from rest_framework.response import Response
+
 
 # redirects user to different urls
 from django.shortcuts import HttpResponseRedirect
@@ -115,12 +117,13 @@ def post_reply(request, pk):
 @login_required
 def post_like(request, pk):
     post = get_object_or_404(Post, id=pk)
-
-    user = request.user.profile
+    user: Profile = request.user.profile
+    liked = False
 
     if user.liked_posts.filter(id=post.id).exists():
         user.liked_posts.remove(post)
     else:
         user.liked_posts.add(post)
+        liked = True
 
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+    return JsonResponse({'liked': liked, 'likes': post.like_count})

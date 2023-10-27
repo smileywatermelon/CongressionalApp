@@ -1,0 +1,16 @@
+<br>
+<div class="postWrap mx-4 my-2" id="{{ post.id }}">
+    <p>{{ post.user.display_name }} <br> <a href="/user/@{{ post.user.username }}"
+        class="username lh-sm text-primary fw-bold text-decoration-none">@{{ post.user.username }}</a></p>
+    <!--use md-block to render markdown-->
+    <a href="/post/{{ post.id }}/"><md-block class="postContent lh-1 POST text-justify" untrusted="true">{{ post.text }}</md-block></a>
+    <span id="lc-{{ post.id }}" class="mx-1 lh-1 text-secondary">{{ post.like_count }}</span>
+    {% csrf_token %}
+    <button class="btn" onclick="like(this, 'reverse')">
+        <i id="i-{{post.id}}"class="bi bi-hand-thumbs-up"></i>
+    </button>
+    <form action="/post/{{post.id}}/reply/" method="post" style="display: inline-block;">
+        {% csrf_token %}
+        <button type="submit" class="btn"><i class="bi bi-chat-left"></i></button>
+    </form>
+</div>

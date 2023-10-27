@@ -19,6 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+    like_count = serializers.IntegerField()
 
     class Meta:
         model = Post
@@ -28,6 +29,8 @@ class PostSerializer(serializers.ModelSerializer):
 class PostChildSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(many=False)
     parent = PostSerializer(many=False)
+
+    like_count = serializers.IntegerField()
 
     class Meta:
         model = Post

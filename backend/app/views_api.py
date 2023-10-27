@@ -36,19 +36,6 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PostSerializer
 
 
-class LikeView(APIView):
-    def put(self, request, pk, format=None):
-        user: Profile = request.user.profile
-        post = Post.objects.filter(id=pk).first()
-
-        if user.liked_posts.exists(post):
-            user.liked_posts.remove(post)
-        else:
-            user.liked_posts.add(post)
-
-        return HttpResponseRedirect('/')
-
-
 router = routers.SimpleRouter()
 router.register(r"users", UserViewSet)
 router.register(r"posts", PostViewSet)
